@@ -5,7 +5,7 @@
 
 ### 1、Mybatis动态sql是做什么的？都有哪些动态sql？简述一下动态sql的执行原理？
 1）Mybatis动态SQL，可以让我们在XML映射文件内，以XML标签的形式编写动态SQL，完成逻辑判断和动态拼接SQL的功能。
-（2）Mybatis提供了9种动态 SQL 标签：<if/>、<choose/>、<where/>、<otherwise/>、<trim/>、<when/>、<set/>、<foreach/>、<bind/>。
+（2）Mybatis提供了9种动态 SQL 标签：if、choose(when、otherwise)、trim(where、set)、foreach。
 (3)使用 OGNL 的表达式，从 SQL 参数对象中计算表达式的值,根据表达式的值动态拼接 SQL ，以此来完成动态 SQL 的功能。
 ### 2、Mybatis是否支持延迟加载？如果支持，它的实现原理是什么？
 Mybatis仅支持association关联对象和collection关联集合对象的延迟加载，association指的就是一对一，collection指的就是一对多查询。
@@ -46,4 +46,7 @@ SimpleExecutor（普通执行器，默认）、ReuseExecutor（重用预处理�
 	  //在xml中注册Intercept是配置一些属性
 	  void setProperties(Properties properties);
 	}
-	intercept方法，插件的核心方法，plugin方法，生成target的代理对象，setProperties方法，传递插件所需参数
+	intercept方法，插件的核心方法，plugin方法，生成target的代理对象，setProperties方法，传递插件所需参数，实现插件分三步，即：
+	1.编写Intercepror接口的实现类
+	2.设置插件的签名，告诉mybatis拦截哪个对象的哪个方法
+	3.最后将插件注册到全局配置文件中
